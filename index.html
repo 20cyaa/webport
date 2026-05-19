@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최윤아 | UX 전략 기획자 포트폴리오</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #ffffff;
+            --text-black: #111111;
+            --text-gray: #555555;
+            --text-muted: #999999;
+            --border-line: #e8e8e8;
+            --grid-color: rgba(0, 0, 0, 0.02);
+            --speed: 0.8s;
+            --easing: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--speed) var(--easing), transform var(--speed) var(--easing);
+        }
+
+        .reveal-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 10000;
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-black);
+        }
+
+        .section-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 140px 40px;
+        }
+
+        .resume-screen-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 140px 40px 60px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title-box {
+            margin-bottom: 50px;
+        }
+
+        .section-title-box h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title-box h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--text-black);
+        }
+
+        /* -----------------------------------------
+           LANDING HERO
+        ----------------------------------------- */
+        .hero-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .hero-meta-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-gray);
+            letter-spacing: 0.25em;
+            margin-bottom: 25px;
+        }
+
+        .hero-container h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 5.5rem;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 35px;
+        }
+
+        .hero-container p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--text-gray);
+            max-width: 800px;
+            line-height: 1.8;
+            margin-bottom: 50px;
+        }
+
+        .hero-btn-wrap {
+            display: flex;
+            gap: 20px;
+        }
+
+        .action-btn {
+            padding: 18px 45px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s var(--easing);
+            border: 1px solid var(--text-black);
+            background: transparent;
+            color: var(--text-black);
+        }
+
+        .btn-solid {
+            background: var(--text-black);
+            color: #ffffff;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+        }
+
+        /* -----------------------------------------
+           INDEX SECTION (박스 라인 제거 및 여백 최적화)
+        ----------------------------------------- */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
+
+        .index-card {
+            background: transparent;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.4s var(--easing);
+        }
+
+        .index-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .index-num {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #dddddd;
+            transition: color 0.4s;
+            margin-bottom: 15px;
+        }
+
+        .index-card:hover .index-num {
+            color: var(--text-black);
+        }
+
+        .index-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.01em;
+        }
+
+        .index-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .index-go-btn {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-black);
+        }
+
+        /* -----------------------------------------
+           ABOUT ME (RESUME) 16:9 내추럴 그리드 구조 (박스 제거)
+        ----------------------------------------- */
+        .resume-layout-box {
+            display: grid;
+            grid-template-columns: 260px 1fr 1fr;
+            gap: 50px;
+            background: transparent;
+        }
+
+        .resume-profile-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 30px;
+        }
+
+        .profile-photo-wrapper {
+            width: 100%;
+            height: 250px;
+            background: #f7f7f7;
+            overflow: hidden;
+        }
+
+        .profile-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-meta-row {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .profile-meta-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .profile-meta-row label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        .profile-meta-row p {
+            font-size: 1rem;
+            font-weight: 600;
+            word-break: keep-all;
+        }
+
+        .resume-data-column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: flex-start;
+        }
+
+        .data-block-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--text-black);
+            padding-bottom: 8px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-row-item {
+            margin-bottom: 30px;
+        }
+
+        .data-row-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+            gap: 15px;
+        }
+
+        .item-duration {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .item-details h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .item-details .sub-org {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .item-details ul {
+            padding-left: 15px;
+            color: var(--text-gray);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .item-details li {
+            margin-bottom: 6px;
+        }
+
+        /* -----------------------------------------
+           SKILLS SECTION (박스 테두리 제거)
+        ----------------------------------------- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
+
+        .skill-box-card {
+            background: transparent;
+            padding: 10px 0;
+        }
+
+        .skill-box-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--text-black);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-list-items {
+            list-style: none;
+        }
+
+        .skill-list-items li {
+            margin-bottom: 22px;
+        }
+
+        .skill-list-items li:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-name-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .skill-bar-bg {
+            width: 100%;
+            height: 4px;
+            background: #f0f0f2;
+            position: relative;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--text-black);
+            width: 0;
+            transition: width 1s var(--easing);
+        }
+
+        .text-stack-list {
+            list-style: none;
+        }
+
+        .text-stack-list li {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            position: relative;
+            padding-left: 18px;
+            line-height: 1.6;
+        }
+
+        .text-stack-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-black);
+            font-weight: bold;
+        }
+
+        /* -----------------------------------------
+           PORTFOLIO MATRIX (박스 제거 및 세련된 레이아웃 개편)
+        ----------------------------------------- */
+        .portfolio-group-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 60px 0 30px 0;
+            color: var(--text-black);
+            border-bottom: 1px solid var(--text-black);
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .portfolio-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .portfolio-card {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.4s var(--easing);
+            overflow: hidden;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .p-card-thumb-frame {
+            width: 100%;
+            height: 260px;
+            background: #f7f7f7;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .p-card-thumb-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--easing);
+        }
+
+        .portfolio-card:hover .p-card-thumb-frame img {
+            transform: scale(1.04);
+        }
+
+        .p-card-info-content {
+            padding: 5px 0 0 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .p-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .p-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: var(--text-black);
+            color: #ffffff;
+            padding: 4px 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .p-contrib {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .portfolio-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .portfolio-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .p-card-bullets {
+            padding-left: 18px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .p-card-bullets li {
+            margin-bottom: 6px;
+        }
+
+        .p-card-foot-tags {
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            padding-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .p-foot-tag {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            background: #fcfcfc;
+            border: 1px solid var(--border-line);
+            padding: 4px 10px;
+            font-weight: 500;
+        }
+
+        /* -----------------------------------------
+           MODAL DIALOG POPUP SYSTEM
+        ----------------------------------------- */
+        .content-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(15px);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s var(--easing);
+        }
+
+        .content-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-window-box {
+            width: 90%;
+            max-width: 1000px;
+            height: 80vh;
+            background: #ffffff;
+            border: 1px solid var(--text-black);
+            position: relative;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-close-trigger {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-black);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .modal-body-viewport {
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-body-viewport video, 
+        .modal-body-viewport iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-line);
+            padding: 120px 40px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        footer h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .index-grid, .resume-layout-box, .skills-grid, .portfolio-matrix {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .resume-screen-wrapper { min-height: auto; padding-top: 120px; }
+            .hero-container h1 { font-size: 3.5rem; }
+            header { padding: 15px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-logo" onclick="window.scrollTo(0,0)">YUNA CHOI</div>
+        <nav class="nav-links">
+            <a href="#hero-section">Intro</a>
+            <a href="#index-section">Index</a>
+            <a href="#resume-section">About Me</a>
+            <a href="#skills-section">Skills</a>
+            <a href="#portfolio-section">Portfolio</a>
+        </nav>
+    </header>
+
+    <div class="main-scroller">
+
+        <section class="section-wrapper" id="hero-section">
+            <div class="hero-container reveal-element">
+                <div class="hero-meta-tag">UX/UI Experience Planner</div>
+                <h1>WHY-DRIVEN<br>ARCHITECTURE.</h1>
+                <p>
+                    최윤아는 단순한 심미적 디자인을 넘어 사용자의 내재된 저니 흐름과 비즈니스의 유기적인 서비스 아키텍처를 정밀 분석하여 논리적 해답을 도출하는 경험 설계자입니다.
+                </p>
+                <div class="hero-btn-wrap">
+                    <button class="action-btn btn-solid" onclick="document.getElementById('index-section').scrollIntoView();">View Framework</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="index-section">
+            <div class="section-title-box reveal-element">
+                <h2>Architecture Index</h2>
+            </div>
+
+            <div class="index-grid reveal-element">
+                <div class="index-card" onclick="document.getElementById('resume-section').scrollIntoView();">
+                    <div>
+                        <div class="index-num">01</div>
+                        <h3>About Me & Resume</h3>
+                        <p>경희대 학업 수석급 정량 지표와 북미권 캐나다 글로벌 협업 역량 및 직무 설계의 기반 이력을 투명하게 집약한 정보 보드입니다.</p>
+                    </div>
+                    <div class="index-go-btn">Read Record <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <div class="index-card" onclick="document.getElementById('skills-section').scrollIntoView();">
+                    <div>
+                        <div class="index-num">02</div>
+                        <h3>UX/UI Skills Architecture</h3>
+                        <p>Figma 컴포넌트 마스터리 기술 스택부터 정성적 리서치 분석력, 그리고 생성형 AI 프로세스 통합 능력을 데이터로 입증합니다.</p>
+                    </div>
+                    <div class="index-go-btn">View Capability <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <div class="index-card" onclick="document.getElementById('portfolio-section').scrollIntoView();">
+                    <div>
+                        <div class="index-num">03</div>
+                        <h3>Product Portfolio</h3>
+                        <p>실 운영 배포 목적의 모바일 유틸리티와 스마트 시티 하드웨어 융합 솔루션, 88개 스크린 대형 스프린트 등의 실전 성과 큐레이션입니다.</p>
+                    </div>
+                    <div class="index-go-btn">Explore Works <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="resume-screen-wrapper" id="resume-section">
+            <div class="section-title-box reveal-element">
+                <h2>About Me</h2>
+            </div>
+
+            <div class="resume-layout-box reveal-element">
+                <aside class="resume-profile-column">
+                    <div>
+                        <div class="profile-photo-wrapper">
+                            <img src="증명사진_최종.jpg" alt="최윤아 프로필 사진" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600'">
+                        </div>
+                        <div class="profile-meta-row">
+                            <label>Name</label>
+                            <p>최윤아 / Yuna Choi</p>
+                        </div>
+                        <div class="profile-meta-row">
+                            <label>Education</label>
+                            <p>경희대학교 산업디자인학과</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="profile-meta-row">
+                            <label>Contact</label>
+                            <p>010-2830-6153</p>
+                        </div>
+                        <div class="profile-meta-row">
+                            <label>Email</label>
+                            <p style="font-size:0.85rem;">angelacya0410@gmail.com</p>
+                        </div>
+                        <div class="profile-meta-row">
+                            <label>Global Capability</label>
+                            <p>TOPIK 6 / Canada Exchange</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="resume-data-column">
+                    <div>
+                        <h3 class="data-block-title">Education</h3>
+                        <div class="data-row-item">
+                            <div class="item-head">
+                                <h4>경희대학교 (본교)</h4>
+                                <span class="item-duration">2020.03 - 2026.02</span>
+                            </div>
+                            <p class="sub-org">산업디자인학과 학사 졸업 · 평점 4.2 / 4.5</p>
+                            <ul>
+                                <li>인간공학, 인터랙션 디자인, 데이터 분석 기반 설계 전공</li>
+                            </ul>
+                        </div>
+                        <div class="data-row-item">
+                            <div class="item-head">
+                                <h4>Memorial University</h4>
+                                <span class="item-duration">2023.09 - 2023.12</span>
+                            </div>
+                            <p class="sub-org">Canada 교환학생 프로그램 이수</p>
+                            <ul>
+                                <li>북미권 디자인 비즈니스 및 심리학 커리큘럼 이수</li>
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+
+                <main class="resume-data-column">
+                    <div>
+                        <h3 class="data-block-title">Experience & Activities</h3>
+                        <div class="data-row-item">
+                            <div class="item-head">
+                                <h4>코멘토 UX 기획 부트캠프</h4>
+                                <span class="item-duration">2026.02 - 2026.03</span>
+                            </div>
+                            <p class="sub-org">현업 실무 시뮬레이션 과정 수료</p>
+                            <ul>
+                                <li>이용자 VOC 추출 데이터 기반의 기능 단위 역기획서 도출</li>
+                                <li>기획서의 스펙 사양화 및 현직 PM 라운드 피드백 반영</li>
+                            </ul>
+                        </div>
+                        <div class="data-row-item">
+                            <div class="item-head">
+                                <h4>앱개발 해커톤 '세모톤'</h4>
+                                <span class="item-duration">2025.03 - 2025.04</span>
+                            </div>
+                            <p class="sub-org">UXUI 리드 기획자 (기여도 100%)</p>
+                            <ul>
+                                <li>대학생 상호 멘토링 매칭 플랫폼 서비스 아키텍처 수립</li>
+                                <li>총 88개의 모바일 고해상도 UI 자산 설계</li>
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="skills-section">
+            <div class="section-title-box reveal-element">
+                <h2>Skills Capability</h2>
+            </div>
+
+            <div class="skills-grid reveal-element">
+                <div class="skill-box-card">
+                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> Software & Tools</h3>
+                    <ul class="skill-list-items">
+                        <li>
+                            <div class="skill-name-row"><span>Figma (Design System)</span><span>95%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-gauge="95%"></div></div>
+                        </li>
+                        <li>
+                            <div class="skill-name-row"><span>Adobe Illustrator / Photoshop</span><span>90%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-gauge="90%"></div></div>
+                        </li>
+                        <li>
+                            <div class="skill-name-row"><span>Generative AI (Midjourney, Sora)</span><span>85%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-gauge="85%"></div></div>
+                        </li>
+                        <li>
+                            <div class="skill-name-row"><span>Notion / Slack Workspace</span><span>90%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" data-gauge="90%"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="skill-box-card">
+                    <h3><i class="fa-solid fa-gem"></i> Core Strengths</h3>
+                    <ul class="text-stack-list">
+                        <li><strong>논리적 가설 검증 능력:</strong> 비정형적 문제나 이용자 불편 사항(VOC) 분석을 통해 명확한 구조적 인포메이션 아키텍처(IA) 모델로 치환합니다.</li>
+                        <li><strong>집요한 오너십과 협업력:</strong> 해커톤 스프린트 및 대규모 단위 과업에서 기획 의도와 규격 문서의 명세화를 통해 개발 파트와의 오차율 없는 협업을 이끕니다.</li>
+                        <li><strong>생산성 고도화 마인드셋:</strong> 최신 생성형 AI 비주얼 파이프라인 워크플로우를 실무 구조에 공격적으로 연동하여 디자인 생산 속도를 비약적으로 향상시킵니다.</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box-card">
+                    <h3><i class="fa-solid fa-diagram-project"></i> UX Deliverables</h3>
+                    <ul class="text-stack-list">
+                        <li>사용자 정성 인터뷰 가이드설계 및 페르소나 데이터 매핑</li>
+                        <li>기능 정의서(PRD) 설계 및 세부 인터페이스 유저 저니 맵 빌드</li>
+                        <li>High-Fidelity 와이어프레임 설계 및 컴포넌트 라이브러리 가이드라인 구축</li>
+                        <li>하드웨어 IoT 통신 모듈 스키마 연동형 서비스 인프라 기획</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="portfolio-section">
+            <div class="section-title-box reveal-element">
+                <h2>Product Portfolio</h2>
+            </div>
+
+            <div class="portfolio-group-title reveal-element">Application Development Projects</div>
+            <div class="portfolio-matrix reveal-element">
+                
+                <div class="portfolio-card" onclick="openContentPopup('app', 'Retrivr')">
+                    <div class="p-card-thumb-frame">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600" alt="Retrivr">
+                    </div>
+                    <div class="p-card-info-content">
+                        <div>
+                            <div class="p-card-top">
+                                <span class="p-badge">Side Project</span>
+                                <span class="p-contrib">기여도 60%</span>
+                            </div>
+                            <h3>'Retrivr' 공용 자산 관리 앱</h3>
+                            <p>기자재 분실 최소화 및 무인 대여 추적 자동화를 실현한 실사용 중심의 매니지먼트 시스템입니다.</p>
+                            <ul class="p-card-bullets">
+                                <li>사용자 중심 예외 반납 케이스 최적화 시나리오 구축</li>
+                                <li>Figma 프로토타이핑 연동 인터랙션 데이터 세분화</li>
+                            </ul>
+                        </div>
+                        <div class="p-card-foot-tags">
+                            <span class="p-foot-tag">UX Strategy</span>
+                            <span class="p-foot-tag">Figma Prototype</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" onclick="openContentPopup('app', 'Meetcha')">
+                    <div class="p-card-thumb-frame">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600" alt="Meetcha">
+                    </div>
+                    <div class="p-card-info-content">
+                        <div>
+                            <div class="p-card-top">
+                                <span class="p-badge">Co-Working</span>
+                                <span class="p-contrib">기여도 50%</span>
+                            </div>
+                            <h3>'Meetcha' 일정 조율 플랫폼</h3>
+                            <p>사용자별 공백 시간 데이터를 조율 필터링하여 오프라인 미팅 타임라인 슬롯을 매칭하는 유틸리티입니다.</p>
+                            <ul class="p-card-bullets">
+                                <li>추천 알고리즘 저니 구조 시각화 가이드라인 설계</li>
+                                <li>교내 데모데이 테크 트랙 전시 완수</li>
+                            </ul>
+                        </div>
+                        <div class="p-card-foot-tags">
+                            <span class="p-foot-tag">Algorithmic UX</span>
+                            <span class="p-foot-tag">Mobile Layout</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" onclick="openContentPopup('app', '쓰담쓰담')">
+                    <div class="p-card-thumb-frame">
+                        <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=600" alt="쓰담쓰담">
+                    </div>
+                    <div class="p-card-info-content">
+                        <div>
+                            <div class="p-card-top">
+                                <span class="p-badge">Contest</span>
+                                <span class="p-contrib">로커톤 입상 · 60%</span>
+                            </div>
+                            <h3>'쓰담쓰담' 에코 스마트 라커</h3>
+                            <p>도심 쓰레기 범람 문제를 타겟으로 IoT 수거 인프라 기획과 모바일 보상 앱 설계를 융합한 프로젝트입니다.</p>
+                            <ul class="p-card-bullets">
+                                <li>하드웨어 제어 인터페이스와 앱 저니맵 간 유기적 결속</li>
+                            </ul>
+                        </div>
+                        <div class="p-card-foot-tags">
+                            <span class="p-foot-tag">IoT UX Design</span>
+                            <span class="p-foot-tag">Service Architecture</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" onclick="openContentPopup('app', '세모톤')">
+                    <div class="p-card-thumb-frame">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600" alt="세모톤">
+                    </div>
+                    <div class="p-card-info-content">
+                        <div>
+                            <div class="p-card-top">
+                                <span class="p-badge">Hackathon</span>
+                                <span class="p-contrib">기여도 100%</span>
+                            </div>
+                            <h3>'세모톤' 대학생 상호 멘토링 플랫폼</h3>
+                            <p>지식 공유형 대학생 상호 매칭 플랫폼 기획 및 고밀도 88개 화면 인터페이스 전체 구조 자산 설계작입니다.</p>
+                            <ul class="p-card-bullets">
+                                <li>3주 단기 고속 스프린트를 통한 최적 와이어프레임 패키징 완성</li>
+                            </ul>
+                        </div>
+                        <div class="p-card-foot-tags">
+                            <span class="p-foot-tag">Rapid Sprint</span>
+                            <span class="p-foot-tag">88 Screens Framework</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-group-title reveal-element">AI-Integrated Pipeline Content</div>
+            <div class="portfolio-matrix reveal-element">
+                
+                <div class="portfolio-card" onclick="openContentPopup('video', 'media/video.mp4')">
+                    <div class="p-card-thumb-frame">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600" alt="AI Video">
+                    </div>
+                    <div class="p-card-info-content">
+                        <div>
+                            <div class="p-card-top">
+                                <span class="p-badge" style="background:#444444;">AI Video Motion</span>
+                                <span class="p-contrib">Format: MP4 Video</span>
+                            </div>
+                            <h3>Sora & Kling 기반 유저 시나리오 시뮬레이션</h3>
+                            <p>인터랙션 디자인 프로토타이핑 이전 사용자의 공간 전이 및 맥락 행동을 고해상도 인공지능 모션 그래픽으로 생성 구현한 콘텐츠입니다.</p>
+                            <ul class="p-card-bullets">
+                                <li>[클릭 시 팝업] media/video.mp4 비디오 엔진 자동 로드 재생</li>
+                            </ul>
+                        </div>
+                        <div class="p-card-foot-tags">
+                            <span class="p-foot-tag">Sora AI Engine</span>
+                            <span class="p-foot-tag">Kling Motion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card" onclick="openContentPopup('slide', 'media/slide.pdf')">
+                    <div class="p-card-thumb-frame">
+                        <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=600" alt="AI Document">
+                    </div>
+                    <div class="p-card-info-content">
+                        <div>
+                            <div class="p-card-top">
+                                <span class="p-badge" style="background:#444444;">AI Framework Document</span>
+                                <span class="p-contrib">Format: PDF / Slide</span>
+                            </div>
+                            <h3>Generative AI UI Pipeline 기획 상세 공정표</h3>
+                            <p>Midjourney v6 및 Krea AI의 이미지 업스케일 연산 노드를 결합하여 88개 화면 스프린트 기획을 단기간 가속화한 방법론 슬라이드 아카이브입니다.</p>
+                            <ul class="p-card-bullets">
+                                <li>[클릭 시 팝업] media/slide.pdf 슬라이드 뷰어 엔진 호출</li>
+                            </ul>
+                        </div>
+                        <div class="p-card-foot-tags">
+                            <span class="p-foot-tag">Midjourney v6</span>
+                            <span class="p-foot-tag">Pipeline Slide</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="reveal-element">
+            <h2>Ready to Design the Next Experience.</h2>
+            <p>최윤아 | 010-2830-6153 | angelacya0410@gmail.com</p>
+            <button class="action-btn btn-solid" onclick="window.location.href='mailto:angelacya0410@gmail.com'">Get In Touch</button>
+        </footer>
+
+    </div>
+
+    <div class="content-modal-overlay" id="global-content-modal" onclick="closeContentPopup()">
+        <div class="modal-window-box" onclick="event.stopPropagation()">
+            <button class="modal-close-trigger" onclick="closeContentPopup()">[ Close ✕ ]</button>
+            <div class="modal-body-viewport" id="modal-viewport-root"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const revealElements = document.querySelectorAll(".reveal-element");
+            const skillBars = document.querySelectorAll(".skill-bar-fill");
+
+            const revealOnScroll = function () {
+                const triggerBottom = window.innerHeight * 0.85;
+
+                revealElements.forEach(el => {
+                    const elTop = el.getBoundingClientRect().top;
+                    if (elTop < triggerBottom) {
+                        el.classList.add("visible");
+                        
+                        if(el.id === 'skills-section') {
+                            skillBars.forEach(bar => {
+                                bar.style.width = bar.getAttribute("data-gauge");
+                            });
+                        }
+                    }
+                });
+            };
+
+            window.addEventListener("scroll", revealOnScroll);
+            revealOnScroll();
+        });
+
+        function openContentPopup(type, source) {
+            const modal = document.getElementById("global-content-modal");
+            const root = document.getElementById("modal-viewport-root");
+            root.innerHTML = ""; 
+
+            if (type === 'video') {
+                root.innerHTML = `<video src="${source}" controls autoplay style="background:#000;"></video>`;
+            } 
+            else if (type === 'slide') {
+                root.innerHTML = `<iframe src="${source}"></iframe>`;
+            } 
+            else if (type === 'app') {
+                root.innerHTML = `
+                    <div style="color:#ffffff; text-align:center; padding: 40px; word-break:keep-all;">
+                        <h2 style="font-size:2rem; margin-bottom:15px; font-family:'Cinzel', serif;">${source} Project Asset</h2>
+                        <p style="color:#888888; font-size:1rem; max-width:500px; margin: 0 auto; line-height:1.6;">
+                            본 프로젝트의 High-Fidelity 프로토타입 시나리오는 통합 보안 문서 자산으로 보호되어 있습니다. 상세 Figma 인스펙션이 필요할 시 Contact 정보를 활용해 문의 바랍니다.
+                        </p>
+                    </div>`;
+            }
+
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden"; 
+        }
+
+        function closeContentPopup() {
+            const modal = document.getElementById("global-content-modal");
+            const root = document.getElementById("modal-viewport-root");
+            
+            modal.classList.remove("active");
+            root.innerHTML = ""; 
+            document.body.style.overflow = "auto";
+        }
+    </script>
+</body>
+</html>
